@@ -1,12 +1,25 @@
-<!DOCTYPE html>
-<html lang="en">
-<head></head>
-<body>
-    <h1 class="text-center title-1"> Cadastro de Disciplina </h1>
-    <form action="/disciplina" method="post">
-        <p>nome:<input type="text" name="nome" /></p>
-        <p>codigo:<input type="text" name="codigo" /></p>
-        <p><input type="submit" value="Salvar" /></p>
-    </form>
-</body>
-</html>
+<%- contentFor('body') %>
+<h1 class="text-center title-1"> Cadastro de Disciplina </h1>
+<form action="/disciplina" method="post">
+    <p>nome:<input type="text" name="nome" /></p>
+    <p>codigo:<input type="text" name="codigo" /></p>
+    <p>Horários:</p>
+
+    <row>
+    	<col><input type="text" name="diaDaSemana_1"/></col>
+    	<col><input type="text" name="horario_1"/></col>
+    </row>
+	<row>
+    	<col><input type="text" name="diaDaSemana_2"/></col>
+    	<col><input type="text" name="horario_2"/></col>
+    </row>
+	<row>
+    	<col><input type="text" name="diaDaSemana_3"/></col>
+    	<col><input type="text" name="horario_3"/></col>
+    </row>
+    <row>
+    	<col><input type="text" name="diaDaSemana_4"/></col>
+    	<col><input type="text" name="horario_4"/></col>
+    </row>
+    <p><input type="submit" value="Salvar" /></p>
+</form>

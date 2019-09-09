@@ -1,14 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-<head></head>
-<body>
-  <h1 class="text-center title-1"> Lista de Alunos </h1>
-  <ul>
-    <% alunoslist.forEach(function(aluno){ %>
+<%- contentFor('body') %>
+<h1 class="text-center title-1"> Lista de Alunos </h1>
+<ul>	
+	<% alunoslist.forEach(function(aluno){ %>
     <li><a href="/aluno/<%= aluno._id %>"><%= aluno.nome %> (<%= aluno.matricula %>)</a></li> 
     <%})%>
-  </ul>
-  <a href="/novoAluno">Novo Aluno</a>
-  <a href="/">Voltar</a>
-</body> 
-</html>
+</ul>
+<a href="/novoAluno">Novo Aluno</a>
+<a href="/">Voltar</a>

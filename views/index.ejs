@@ -1,14 +1,6 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-  </head>
-  <body>
-    <h1><%= title %></h1>
-    <p>Bem vindo a nossa aplicação!</p>
+<%- contentFor('body') %>
+<h1><%= title %></h1>
+<p>Bem vindo a nossa aplicação!</p>
 
-    <a href="/alunos">Alunos</a>
-    <a href="/disciplinas">Disciplinas</a>
-  </body>
-</html>
+<a href="/alunos">Alunos</a>
+<a href="/disciplinas">Disciplinas</a>

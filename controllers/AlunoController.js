@@ -1,4 +1,4 @@
-Aluno = require('../models/alunoSchema.js');
+Aluno = require('../models/AlunoSchema.js');
 Disciplina = require("../models/DisciplinaSchema");
 const mongoose = require('mongoose')
 
@@ -6,8 +6,8 @@ const mongoose = require('mongoose')
 exports.index = function (req, res) {
    var Alunos = mongoose.model('alunocollection', Aluno, 'alunocollection');
    Alunos.find({}).lean().exec(
-      function (e, docs) {
-         res.render('alunos', { "alunoslist": docs });
+    function (e, docs) {
+       res.render('alunos', { "alunoslist": docs });
    });
 };
 
@@ -22,14 +22,14 @@ exports.new = function (req, res) {
   if(req.body.disciplinas)[aluno.disciplinas_ok, aluno.disciplinas_conflito] = verifyDisciplinas(req.body.disciplinas);
 
   aluno.save(function (err) {
-      if (err) {
-          console.log("Error! " + err.message);
-          return err;
-      }
-      else {
-          console.log("Post saved");
-          res.redirect("alunos");
-      }
+    if (err) {
+      console.log("Error! " + err.message);
+      return err;
+    }
+    else {
+      console.log("Post saved");
+      res.redirect("alunos");
+    }
   });
 };
 
