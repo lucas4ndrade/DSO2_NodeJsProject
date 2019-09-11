@@ -13,6 +13,8 @@ exports.index = function (req, res) {
 // Create
 exports.new = function (req, res) {
 
+  console.log(req)
+
   var DisciplinaModel = mongoose.model('disciplinacollection', Disciplina, 'disciplinacollection');
   var disciplina = new DisciplinaModel();
 

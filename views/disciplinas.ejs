@@ -2,7 +2,7 @@
 <h1 class="text-center title-1"> Lista de Disciplinas </h1>
 <ul>
 	<% disciplinaslist.forEach(function(disciplina){ %>
-	<li><a href="/disciplina/<%= aluno._id %>"><%= disciplina.nome %> (<%= disciplina.codigo %>)</a></li> 
+	<li><a href="/disciplina/<%= disciplina._id %>"><%= disciplina.nome %> (<%= disciplina.codigo %>)</a></li> 
 	<%})%>
 </ul>
 <a href="/novaDisciplina">Nova Disciplina</a>

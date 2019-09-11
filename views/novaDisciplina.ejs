@@ -1,25 +1,139 @@
 <%- contentFor('body') %>
 <h1 class="text-center title-1"> Cadastro de Disciplina </h1>
-<form action="/disciplina" method="post">
-    <p>nome:<input type="text" name="nome" /></p>
-    <p>codigo:<input type="text" name="codigo" /></p>
+<form action="/disciplina" method="post" class="webform-client-form webform-client-form-48">
+    <p>nome:</p>
+    <input class="form-control" type="text" name="nome" />
+    <p>codigo:</p>
+    <input class="form-control" type="text" name="codigo" />
     <p>Horários:</p>
 
-    <row>
-    	<col><input type="text" name="diaDaSemana_1"/></col>
-    	<col><input type="text" name="horario_1"/></col>
-    </row>
-	<row>
-    	<col><input type="text" name="diaDaSemana_2"/></col>
-    	<col><input type="text" name="horario_2"/></col>
-    </row>
-	<row>
-    	<col><input type="text" name="diaDaSemana_3"/></col>
-    	<col><input type="text" name="horario_3"/></col>
-    </row>
-    <row>
-    	<col><input type="text" name="diaDaSemana_4"/></col>
-    	<col><input type="text" name="horario_4"/></col>
-    </row>
-    <p><input type="submit" value="Salvar" /></p>
+    <div class="row">
+    	<div class="form-group col-xs-6">
+            <select class="browser-default custom-select" name="diaDaSemana_1">
+                <option selected>Selecione o dia da semana</option>
+                <option value="2">Segunda</option>
+                <option value="3">Terça</option>
+                <option value="4">Quarta</option>
+                <option value="5">Quinta</option>
+                <option value="6">Sexta</option>
+                <option value="7">Sabado</option>
+            </select>
+        </div>
+    	<div class="form-group col-xs-6">
+            <select class="browser-default custom-select" name="horario_1">
+                <option selected>Selecione o horário para o dia da semana escolhido</option>
+                <option value="07:30">07:30</option>
+                <option value="08:20">08:20</option>
+                <option value="09:10">09:10</option>
+                <option value="10:10">10:10</option>
+                <option value="11:00">11:00</option>
+                <option value="13:30">13:30</option>
+                <option value="14:20">14:20</option>
+                <option value="15:10">15:10</option>
+                <option value="16:20">16:20</option>
+                <option value="17:10">17:10</option>
+                <option value="18:30">18:30</option>
+                <option value="19:20">19:20</option>
+                <option value="20:20">20:20</option>
+                <option value="21:10">21:10</option>
+            </select>
+        </div>
+    </div>
+	<div class="row">
+        <div class="form-group col-xs-6">
+            <select class="browser-default custom-select" name="diaDaSemana_2">
+                <option selected>Selecione o dia da semana</option>
+                <option value="2">Segunda</option>
+                <option value="3">Terça</option>
+                <option value="4">Quarta</option>
+                <option value="5">Quinta</option>
+                <option value="6">Sexta</option>
+                <option value="7">Sabado</option>
+            </select>
+        </div>
+        <div class="form-group col-xs-6">
+            <select class="browser-default custom-select" name="horario_2">
+                <option selected>Selecione o horário para o dia da semana escolhido</option>
+                <option value="07:30">07:30</option>
+                <option value="08:20">08:20</option>
+                <option value="09:10">09:10</option>
+                <option value="10:10">10:10</option>
+                <option value="11:00">11:00</option>
+                <option value="13:30">13:30</option>
+                <option value="14:20">14:20</option>
+                <option value="15:10">15:10</option>
+                <option value="16:20">16:20</option>
+                <option value="17:10">17:10</option>
+                <option value="18:30">18:30</option>
+                <option value="19:20">19:20</option>
+                <option value="20:20">20:20</option>
+                <option value="21:10">21:10</option>
+            </select>
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group col-xs-6">
+            <select class="browser-default custom-select" name="diaDaSemana_3">
+                <option selected>Selecione o dia da semana</option>
+                <option value="2">Segunda</option>
+                <option value="3">Terça</option>
+                <option value="4">Quarta</option>
+                <option value="5">Quinta</option>
+                <option value="6">Sexta</option>
+                <option value="7">Sabado</option>
+            </select>
+        </div>
+        <div class="form-group col-xs-6">
+            <select class="browser-default custom-select" name="horario_3">
+                <option selected>Selecione o horário para o dia da semana escolhido</option>
+                <option value="07:30">07:30</option>
+                <option value="08:20">08:20</option>
+                <option value="09:10">09:10</option>
+                <option value="10:10">10:10</option>
+                <option value="11:00">11:00</option>
+                <option value="13:30">13:30</option>
+                <option value="14:20">14:20</option>
+                <option value="15:10">15:10</option>
+                <option value="16:20">16:20</option>
+                <option value="17:10">17:10</option>
+                <option value="18:30">18:30</option>
+                <option value="19:20">19:20</option>
+                <option value="20:20">20:20</option>
+                <option value="21:10">21:10</option>
+            </select>
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group col-xs-6">
+            <select class="browser-default custom-select" name="diaDaSemana_4">
+                <option selected>Selecione o dia da semana</option>
+                <option value="2">Segunda</option>
+                <option value="3">Terça</option>
+                <option value="4">Quarta</option>
+                <option value="5">Quinta</option>
+                <option value="6">Sexta</option>
+                <option value="7">Sabado</option>
+            </select>
+        </div>
+        <div class="form-group col-xs-6">
+            <select class="browser-default custom-select" name="horario_4">
+                <option selected>Selecione o horário para o dia da semana escolhido</option>
+                <option value="07:30">07:30</option>
+                <option value="08:20">08:20</option>
+                <option value="09:10">09:10</option>
+                <option value="10:10">10:10</option>
+                <option value="11:00">11:00</option>
+                <option value="13:30">13:30</option>
+                <option value="14:20">14:20</option>
+                <option value="15:10">15:10</option>
+                <option value="16:20">16:20</option>
+                <option value="17:10">17:10</option>
+                <option value="18:30">18:30</option>
+                <option value="19:20">19:20</option>
+                <option value="20:20">20:20</option>
+                <option value="21:10">21:10</option>
+            </select>
+        </div>
+    </div>
+    <p><input type="submit" class="btn btn-primary" value="Salvar" /></p>
 </form>
