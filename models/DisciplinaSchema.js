@@ -7,6 +7,7 @@ const disciplinaSchema = new mongoose.Schema({
   },
   codigo: {
     type: String,
+    unique: true,
     required: [true, 'o atributo codigo é obrigatório']
   },
   horarios: {

@@ -79,7 +79,7 @@ exports.new = function (req, res) {
         return err;
       }else{
         console.log("Post saved");
-        res.redirect(aluno._id);
+        res.redirect("/aluno/"+aluno._id);
       }
     });
   })
@@ -124,17 +124,17 @@ exports.update = function (req, res) {
             //  O map facilita a função de verificar conflitos
             var horarios_x = disciplina_x.horarios;
             var horarios_x_map = [];
-            if(horarios_x.get('dia_1') && horarios_x.get('hora_1')) horarios_x_map.concat(new Map([[horarios_x.get('dia_1'), horarios_x.get('hora_1')]]));
-            if(horarios_x.get('dia_2') && horarios_x.get('hora_2')) horarios_x_map.concat(new Map([[horarios_x.get('dia_2'), horarios_x.get('hora_2')]]));
-            if(horarios_x.get('dia_3') && horarios_x.get('hora_3')) horarios_x_map.concat(new Map([[horarios_x.get('dia_3'), horarios_x.get('hora_3')]]));
-            if(horarios_x.get('dia_4') && horarios_x.get('hora_4')) horarios_x_map.concat(new Map([[horarios_x.get('dia_4'), horarios_x.get('hora_4')]]));
+            if(horarios_x.get('dia_1') && horarios_x.get('hora_1')) horarios_x_map = horarios_x_map.concat(new Map([[horarios_x.get('dia_1'), horarios_x.get('hora_1')]]));
+            if(horarios_x.get('dia_2') && horarios_x.get('hora_2')) horarios_x_map = horarios_x_map.concat(new Map([[horarios_x.get('dia_2'), horarios_x.get('hora_2')]]));
+            if(horarios_x.get('dia_3') && horarios_x.get('hora_3')) horarios_x_map = horarios_x_map.concat(new Map([[horarios_x.get('dia_3'), horarios_x.get('hora_3')]]));
+            if(horarios_x.get('dia_4') && horarios_x.get('hora_4')) horarios_x_map = horarios_x_map.concat(new Map([[horarios_x.get('dia_4'), horarios_x.get('hora_4')]]));
 
             var horarios_y = disciplina_y.horarios;
             var horarios_y_map = [];
-            if(horarios_y.get('dia_1') && horarios_y.get('hora_1')) horarios_y_map.concat(new Map([[horarios_y.get('dia_1'), horarios_y.get('hora_1')]]));
-            if(horarios_y.get('dia_2') && horarios_y.get('hora_2')) horarios_y_map.concat(new Map([[horarios_y.get('dia_2'), horarios_y.get('hora_2')]]));
-            if(horarios_y.get('dia_3') && horarios_y.get('hora_3')) horarios_y_map.concat(new Map([[horarios_y.get('dia_3'), horarios_y.get('hora_3')]]));
-            if(horarios_y.get('dia_4') && horarios_y.get('hora_4')) horarios_y_map.concat(new Map([[horarios_y.get('dia_4'), horarios_y.get('hora_4')]]));
+            if(horarios_y.get('dia_1') && horarios_y.get('hora_1')) horarios_y_map = horarios_y_map.concat(new Map([[horarios_y.get('dia_1'), horarios_y.get('hora_1')]]));
+            if(horarios_y.get('dia_2') && horarios_y.get('hora_2')) horarios_y_map = horarios_y_map.concat(new Map([[horarios_y.get('dia_2'), horarios_y.get('hora_2')]]));
+            if(horarios_y.get('dia_3') && horarios_y.get('hora_3')) horarios_y_map = horarios_y_map.concat(new Map([[horarios_y.get('dia_3'), horarios_y.get('hora_3')]]));
+            if(horarios_y.get('dia_4') && horarios_y.get('hora_4')) horarios_y_map = horarios_y_map.concat(new Map([[horarios_y.get('dia_4'), horarios_y.get('hora_4')]]));
 
             horarios_x_map.forEach( map_x => map_x.forEach((hora_x, dia_x) => {
               horarios_y_map.forEach( map_y => {

@@ -9,10 +9,7 @@
       <div class="form-group col">
         <select multiple="true" class="selectpicker form-control" data-live-search="true" name="disciplinas" data-width="100%" title="escolha uma ou mais disciplinas">
             <% disciplinas.forEach(function(disciplina){ %>
-
-            <% console.log(disciplina)%>
-            <%= console.log(aluno.disciplinas_conflito)%>
-              <option value="<%= disciplina._id %>" <%= (aluno.disciplinas_ok.includes(disciplina) || aluno.disciplinas_conflito.includes(disciplina)) ? 'selected' : ''  %>> <%= disciplina.nome %>(<%= disciplina.codigo %>)</option>
+              <option value="<%= disciplina._id %>"> <%= disciplina.nome %>(<%= disciplina.codigo %>)</option>
             <%})%>
         </select>
       </div>

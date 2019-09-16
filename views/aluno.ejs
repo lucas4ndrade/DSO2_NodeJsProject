@@ -2,8 +2,8 @@
 <h3 class="text-center title-1"> <%- aluno.nome%> (<%- aluno.matricula%>) </h3>
 
 <% if(aluno.disciplinas_ok.length > 0) { %>
-  <p>Disciplinas:</p>
-  <table class="table">
+  <p>Disciplinas Matriculadas:</p>
+  <table class="table table-bordered">
     <thead>
       <tr>
         <th scope="col">Código</th>
@@ -44,8 +44,8 @@
 <%}%>
 
 <% if(aluno.disciplinas_conflito.length > 0) { %>
-  <p>Disciplinas Conflituosas:</p>
-  <table class="table">
+  <p>As seguintes disciplinas possuem conflito de horários e não poderão ser cursadas pelo aluno:</p>
+  <table class="table table-bordered">
     <thead>
       <tr>
         <th scope="col">Código</th>

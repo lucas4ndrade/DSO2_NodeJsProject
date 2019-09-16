@@ -7,6 +7,7 @@ const alunoSchema = new mongoose.Schema({
   },
   matricula: {
     type: String,
+    unique: true,
     required: [true, 'o atributo matrícula é obrigatório']
   },
   disciplinas_ok: [{
