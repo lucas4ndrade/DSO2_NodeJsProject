@@ -1,132 +1,132 @@
 <%- contentFor('body') %>
 <h1 class="text-center title-1"> Cadastro de Disciplina </h1>
-<form action="/disciplina" method="post" class="webform-client-form webform-client-form-48">
-    <p style="text-align:left !important;">nome:</p>
-    <input class="form-control" type="text" name="nome" value="<%= %>" />
-    <p style="text-align:left !important;">codigo:</p>
-    <input class="form-control" type="text" name="codigo" value="" />
-    <p style="text-align:left !important;">Horários:</p>
+<form action="/disciplina/<%= disciplina._id %>" method="post" class="webform-client-form webform-client-form-48">
+  <p style="text-align:left !important;">nome:</p>
+  <input class="form-control" type="text" name="nome" value="<%= disciplina.nome %>" />
+  <p style="text-align:left !important;">codigo:</p>
+  <input class="form-control" type="text" name="codigo" value="<%= disciplina.codigo %>" />
+  <p style="text-align:left !important;">Horários:</p>
 
-    <div class="row">
-    	<div class="form-group col">
-          <select class="browser-default custom-select" name="diaDaSemana_1">
-            <option value="Segunda">Segunda</option>
-            <option value="Terça">Terça</option>
-            <option value="Quarta">Quarta</option>
-            <option value="Quinta">Quinta</option>
-            <option value="Sexta">Sexta</option>
-            <option value="Sabado">Sabado</option>
-          </select>
-        </div>
-    	<div class="form-group col">
-        <select class="browser-default custom-select" name="horario_1">
-          <option value="07:30">07:30</option>
-          <option value="08:20">08:20</option>
-          <option value="09:10">09:10</option>
-          <option value="10:10">10:10</option>
-          <option value="11:00">11:00</option>
-          <option value="13:30">13:30</option>
-          <option value="14:20">14:20</option>
-          <option value="15:10">15:10</option>
-          <option value="16:20">16:20</option>
-          <option value="17:10">17:10</option>
-          <option value="18:30">18:30</option>
-          <option value="19:20">19:20</option>
-          <option value="20:20">20:20</option>
-          <option value="21:10">21:10</option>
-        </select>
-      </div>
-    </div>
-	<div class="row">
+  <div class="row">
     <div class="form-group col">
-      <select class="browser-default custom-select" name="diaDaSemana_2">
-        <option value="Segunda">Segunda</option>
-        <option value="Terça">Terça</option>
-        <option value="Quarta">Quarta</option>
-        <option value="Quinta">Quinta</option>
-        <option value="Sexta">Sexta</option>
-        <option value="Sabado">Sabado</option>
+      <select class="selectpicker form-control" name="diaDaSemana_1" title="escolha um dia">
+        <option value="Segunda" <%= dia_1 === 'Segunda' ? 'selected' : '' %>> Segunda</option>
+        <option value="Terça"   <%= dia_1 === 'Terça'   ? 'selected' : '' %>> Terça  </option>
+        <option value="Quarta"  <%= dia_1 === 'Quarta'  ? 'selected' : '' %>> Quarta </option>
+        <option value="Quinta"  <%= dia_1 === 'Quinta'  ? 'selected' : '' %>> Quinta </option>
+        <option value="Sexta"   <%= dia_1 === 'Sexta'   ? 'selected' : '' %>> Sexta  </option>
+        <option value="Sabado"  <%= dia_1 === 'Sabado'  ? 'selected' : '' %>> Sabado </option>
       </select>
     </div>
     <div class="form-group col">
-      <select class="browser-default custom-select" name="horario_2">
-        <option value="07:30">07:30</option>
-        <option value="08:20">08:20</option>
-        <option value="09:10">09:10</option>
-        <option value="10:10">10:10</option>
-        <option value="11:00">11:00</option>
-        <option value="13:30">13:30</option>
-        <option value="14:20">14:20</option>
-        <option value="15:10">15:10</option>
-        <option value="16:20">16:20</option>
-        <option value="17:10">17:10</option>
-        <option value="18:30">18:30</option>
-        <option value="19:20">19:20</option>
-        <option value="20:20">20:20</option>
-        <option value="21:10">21:10</option>
+      <select class="selectpicker form-control" name="horario_1"  title="escolha um horário">
+        <option value="07:30" <%= horario_1 === '07:30' ? 'selected' : '' %>>07:30</option>
+        <option value="08:20" <%= horario_1 === '08:20' ? 'selected' : '' %>>08:20</option>
+        <option value="09:10" <%= horario_1 === '09:10' ? 'selected' : '' %>>09:10</option>
+        <option value="10:10" <%= horario_1 === '10:10' ? 'selected' : '' %>>10:10</option>
+        <option value="11:00" <%= horario_1 === '11:00' ? 'selected' : '' %>>11:00</option>
+        <option value="13:30" <%= horario_1 === '13:30' ? 'selected' : '' %>>13:30</option>
+        <option value="14:20" <%= horario_1 === '14:20' ? 'selected' : '' %>>14:20</option>
+        <option value="15:10" <%= horario_1 === '15:10' ? 'selected' : '' %>>15:10</option>
+        <option value="16:20" <%= horario_1 === '16:20' ? 'selected' : '' %>>16:20</option>
+        <option value="17:10" <%= horario_1 === '17:10' ? 'selected' : '' %>>17:10</option>
+        <option value="18:30" <%= horario_1 === '18:30' ? 'selected' : '' %>>18:30</option>
+        <option value="19:20" <%= horario_1 === '19:20' ? 'selected' : '' %>>19:20</option>
+        <option value="20:20" <%= horario_1 === '20:20' ? 'selected' : '' %>>20:20</option>
+        <option value="21:10" <%= horario_1 === '21:10' ? 'selected' : '' %>>21:10</option>
+      </select>
+    </div>
+  </div>
+	<div class="row">
+    <div class="form-group col">
+      <select class="selectpicker form-control" name="diaDaSemana_2" title="escolha um dia">
+        <option value="Segunda" <%= dia_2 === 'Segunda' ? 'selected' : '' %>> Segunda</option>
+        <option value="Terça"   <%= dia_2 === 'Terça'   ? 'selected' : '' %>> Terça  </option>
+        <option value="Quarta"  <%= dia_2 === 'Quarta'  ? 'selected' : '' %>> Quarta </option>
+        <option value="Quinta"  <%= dia_2 === 'Quinta'  ? 'selected' : '' %>> Quinta </option>
+        <option value="Sexta"   <%= dia_2 === 'Sexta'   ? 'selected' : '' %>> Sexta  </option>
+        <option value="Sabado"  <%= dia_2 === 'Sabado'  ? 'selected' : '' %>> Sabado </option>
+      </select>
+    </div>
+    <div class="form-group col">
+      <select class="selectpicker form-control" name="horario_2" title="escolha um horário">
+        <option value="07:30" <%= horario_2 === '07:30' ? 'selected' : '' %>>07:30</option>
+        <option value="08:20" <%= horario_2 === '08:20' ? 'selected' : '' %>>08:20</option>
+        <option value="09:10" <%= horario_2 === '09:10' ? 'selected' : '' %>>09:10</option>
+        <option value="10:10" <%= horario_2 === '10:10' ? 'selected' : '' %>>10:10</option>
+        <option value="11:00" <%= horario_2 === '11:00' ? 'selected' : '' %>>11:00</option>
+        <option value="13:30" <%= horario_2 === '13:30' ? 'selected' : '' %>>13:30</option>
+        <option value="14:20" <%= horario_2 === '14:20' ? 'selected' : '' %>>14:20</option>
+        <option value="15:10" <%= horario_2 === '15:10' ? 'selected' : '' %>>15:10</option>
+        <option value="16:20" <%= horario_2 === '16:20' ? 'selected' : '' %>>16:20</option>
+        <option value="17:10" <%= horario_2 === '17:10' ? 'selected' : '' %>>17:10</option>
+        <option value="18:30" <%= horario_2 === '18:30' ? 'selected' : '' %>>18:30</option>
+        <option value="19:20" <%= horario_2 === '19:20' ? 'selected' : '' %>>19:20</option>
+        <option value="20:20" <%= horario_2 === '20:20' ? 'selected' : '' %>>20:20</option>
+        <option value="21:10" <%= horario_2 === '21:10' ? 'selected' : '' %>>21:10</option>
       </select>
     </div>
   </div> 
   <div class="row">
-      <div class="form-group col">
-        <select class="browser-default custom-select" name="diaDaSemana_3">
-          <option value="Segunda">Segunda</option>
-          <option value="Terça">Terça</option>
-          <option value="Quarta">Quarta</option>
-          <option value="Quinta">Quinta</option>
-          <option value="Sexta">Sexta</option>
-          <option value="Sabado">Sabado</option>
-        </select>
-      </div>
-      <div class="form-group col">
-        <select class="browser-default custom-select" name="horario_3">
-          <option value="07:30">07:30</option>
-          <option value="08:20">08:20</option>
-          <option value="09:10">09:10</option>
-          <option value="10:10">10:10</option>
-          <option value="11:00">11:00</option>
-          <option value="13:30">13:30</option>
-          <option value="14:20">14:20</option>
-          <option value="15:10">15:10</option>
-          <option value="16:20">16:20</option>
-          <option value="17:10">17:10</option>
-          <option value="18:30">18:30</option>
-          <option value="19:20">19:20</option>
-          <option value="20:20">20:20</option>
-          <option value="21:10">21:10</option>
-        </select>
-      </div>
+    <div class="form-group col">
+      <select class="selectpicker form-control" name="diaDaSemana_3" title="escolha um dia">
+        <option value="Segunda" <%= dia_3 === 'Segunda' ? 'selected' : '' %>> Segunda</option>
+        <option value="Terça"   <%= dia_3 === 'Terça'   ? 'selected' : '' %>> Terça  </option>
+        <option value="Quarta"  <%= dia_3 === 'Quarta'  ? 'selected' : '' %>> Quarta </option>
+        <option value="Quinta"  <%= dia_3 === 'Quinta'  ? 'selected' : '' %>> Quinta </option>
+        <option value="Sexta"   <%= dia_3 === 'Sexta'   ? 'selected' : '' %>> Sexta  </option>
+        <option value="Sabado"  <%= dia_3 === 'Sabado'  ? 'selected' : '' %>> Sabado </option>
+      </select>
+    </div>
+    <div class="form-group col">
+      <select class="selectpicker form-control" name="horario_3" title="escolha um horário">
+        <option value="07:30" <%= horario_3 === '07:30' ? 'selected' : '' %>>07:30</option>
+        <option value="08:20" <%= horario_3 === '08:20' ? 'selected' : '' %>>08:20</option>
+        <option value="09:10" <%= horario_3 === '09:10' ? 'selected' : '' %>>09:10</option>
+        <option value="10:10" <%= horario_3 === '10:10' ? 'selected' : '' %>>10:10</option>
+        <option value="11:00" <%= horario_3 === '11:00' ? 'selected' : '' %>>11:00</option>
+        <option value="13:30" <%= horario_3 === '13:30' ? 'selected' : '' %>>13:30</option>
+        <option value="14:20" <%= horario_3 === '14:20' ? 'selected' : '' %>>14:20</option>
+        <option value="15:10" <%= horario_3 === '15:10' ? 'selected' : '' %>>15:10</option>
+        <option value="16:20" <%= horario_3 === '16:20' ? 'selected' : '' %>>16:20</option>
+        <option value="17:10" <%= horario_3 === '17:10' ? 'selected' : '' %>>17:10</option>
+        <option value="18:30" <%= horario_3 === '18:30' ? 'selected' : '' %>>18:30</option>
+        <option value="19:20" <%= horario_3 === '19:20' ? 'selected' : '' %>>19:20</option>
+        <option value="20:20" <%= horario_3 === '20:20' ? 'selected' : '' %>>20:20</option>
+        <option value="21:10" <%= horario_3 === '21:10' ? 'selected' : '' %>>21:10</option>
+      </select>
+    </div>
   </div>
   <div class="row">
-      <div class="form-group col">
-        <select class="browser-default custom-select" name="diaDaSemana_4">
-          <option value="Segunda">Segunda</option>
-          <option value="Terça">Terça</option>
-          <option value="Quarta">Quarta</option>
-          <option value="Quinta">Quinta</option>
-          <option value="Sexta">Sexta</option>
-          <option value="Sabado">Sabado</option>
-        </select>
-      </div>
-      <div class="form-group col">
-        <select class="browser-default custom-select" name="horario_4">
-          <option value="07:30">07:30</option>
-          <option value="08:20">08:20</option>
-          <option value="09:10">09:10</option>
-          <option value="10:10">10:10</option>
-          <option value="11:00">11:00</option>
-          <option value="13:30">13:30</option>
-          <option value="14:20">14:20</option>
-          <option value="15:10">15:10</option>
-          <option value="16:20">16:20</option>
-          <option value="17:10">17:10</option>
-          <option value="18:30">18:30</option>
-          <option value="19:20">19:20</option>
-          <option value="20:20">20:20</option>
-          <option value="21:10">21:10</option>
-        </select>
-      </div>
+    <div class="form-group col">
+      <select class="selectpicker form-control" name="diaDaSemana_4" title="escolha um dia">
+        <option value="Segunda" <%= dia_4 === 'Segunda' ? 'selected' : '' %>> Segunda</option>
+        <option value="Terça"   <%= dia_4 === 'Terça'   ? 'selected' : '' %>> Terça  </option>
+        <option value="Quarta"  <%= dia_4 === 'Quarta'  ? 'selected' : '' %>> Quarta </option>
+        <option value="Quinta"  <%= dia_4 === 'Quinta'  ? 'selected' : '' %>> Quinta </option>
+        <option value="Sexta"   <%= dia_4 === 'Sexta'   ? 'selected' : '' %>> Sexta  </option>
+        <option value="Sabado"  <%= dia_4 === 'Sabado'  ? 'selected' : '' %>> Sabado </option>
+      </select>
+    </div>
+    <div class="form-group col">
+      <select class="selectpicker form-control" name="horario_4" title="escolha um horário">
+        <option value="07:30" <%= horario_4 === '07:30' ? 'selected' : '' %>>07:30</option>
+        <option value="08:20" <%= horario_4 === '08:20' ? 'selected' : '' %>>08:20</option>
+        <option value="09:10" <%= horario_4 === '09:10' ? 'selected' : '' %>>09:10</option>
+        <option value="10:10" <%= horario_4 === '10:10' ? 'selected' : '' %>>10:10</option>
+        <option value="11:00" <%= horario_4 === '11:00' ? 'selected' : '' %>>11:00</option>
+        <option value="13:30" <%= horario_4 === '13:30' ? 'selected' : '' %>>13:30</option>
+        <option value="14:20" <%= horario_4 === '14:20' ? 'selected' : '' %>>14:20</option>
+        <option value="15:10" <%= horario_4 === '15:10' ? 'selected' : '' %>>15:10</option>
+        <option value="16:20" <%= horario_4 === '16:20' ? 'selected' : '' %>>16:20</option>
+        <option value="17:10" <%= horario_4 === '17:10' ? 'selected' : '' %>>17:10</option>
+        <option value="18:30" <%= horario_4 === '18:30' ? 'selected' : '' %>>18:30</option>
+        <option value="19:20" <%= horario_4 === '19:20' ? 'selected' : '' %>>19:20</option>
+        <option value="20:20" <%= horario_4 === '20:20' ? 'selected' : '' %>>20:20</option>
+        <option value="21:10" <%= horario_4 === '21:10' ? 'selected' : '' %>>21:10</option>
+      </select>
+    </div>
   </div>
-  <a  href="/disciplinas"><input type="button" class="btn btn-secondary" value="Voltar" ></input></a>
+  <a  href="/disciplina/<%= disciplina._id%>"><input type="button" class="btn btn-secondary" value="Voltar" ></input></a>
   <input type="submit" class="btn btn-primary" value="Salvar" />
 </form>

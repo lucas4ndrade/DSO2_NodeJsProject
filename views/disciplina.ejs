@@ -4,9 +4,18 @@
 <% if(disciplina.horarios){%>
   <p>Horários:</p>
   <ul class="list-group" style="margin-bottom:3%">
-    <% disciplina.horarios.forEach(function(horario, data){ %>
-      <li class="list-group-item"><b><%= data %>: </b><%= horario %></li> 
-    <%})%>
+    <% if(disciplina.horarios.get('dia_1') && disciplina.horarios.get('hora_1')){%>
+      <li class="list-group-item"><b><%= disciplina.horarios.get('dia_1') %>: </b><%= disciplina.horarios.get('hora_1') %></li> 
+    <%}%>
+    <% if(disciplina.horarios.get('dia_2') && disciplina.horarios.get('hora_2')){%>
+      <li class="list-group-item"><b><%= disciplina.horarios.get('dia_2') %>: </b><%= disciplina.horarios.get('hora_2') %></li> 
+    <%}%>
+    <% if(disciplina.horarios.get('dia_3') && disciplina.horarios.get('hora_3')){%>
+      <li class="list-group-item"><b><%= disciplina.horarios.get('dia_3') %>: </b><%= disciplina.horarios.get('hora_3') %></li> 
+    <%}%>
+    <% if(disciplina.horarios.get('dia_4') && disciplina.horarios.get('hora_4')){%>
+      <li class="list-group-item"><b><%= disciplina.horarios.get('dia_4') %>: </b><%= disciplina.horarios.get('hora_4') %></li> 
+    <%}%>
   </ul>
 <%} else {%>
   <p>Esta disciplina não possui horários</p>

@@ -91,20 +91,22 @@ exports.update = function (req, res) {
           // se não for a mesma disciplina...
           if(disciplina_x.codigo !== disciplina_y.codigo){
             // verifica se não possuem horários em conflito
-            disciplina_x.horarios.forEach((horario, diaDaSemana)=>{
-              // se tem conflito...
-              if(disciplina_y.horarios.get(diaDaSemana) === horario){
-                //e se as disciplinas já não estão no array de conflito, adiciona elas ao array, e remove do array de disciplinas ok
-                if(!acc[1].includes(disciplina_x)){
-                  acc[0].splice(acc[0].indexOf(disciplina_x), 1);
-                  acc[1] = acc[1].concat(disciplina_x);
-                }
-                if(!acc[1].includes(disciplina_y)){
-                  acc[0].splice(acc[0].indexOf(disciplina_y), 1);
-                  acc[1] = acc[1].concat(disciplina_y);
-                }
-              } 
-            })
+            var horarios_x = disciplina_x.horarios
+            var horarios_y = disciplina_y.horarios
+            if((horarios_x.get('dia_1') === horarios_y.get('dia_1') && horarios_x.get('hora_1') === horarios_y.get('hora_1')) || 
+               (horarios_x.get('dia_2') === horarios_y.get('dia_2') && horarios_x.get('hora_2') === horarios_y.get('hora_2')) || 
+               (horarios_x.get('dia_3') === horarios_y.get('dia_3') && horarios_x.get('hora_3') === horarios_y.get('hora_3')) || 
+               (horarios_x.get('dia_4') === horarios_y.get('dia_4') && horarios_x.get('hora_4') === horarios_y.get('hora_4')) ){
+              // se possuem conflito e se as disciplinas já não estão no array de conflito, adiciona elas ao array, e remove do array de disciplinas ok
+              if(!acc[1].includes(disciplina_x)){
+                acc[0].splice(acc[0].indexOf(disciplina_x), 1);
+                acc[1] = acc[1].concat(disciplina_x);
+              }
+              if(!acc[1].includes(disciplina_y)){
+                acc[0].splice(acc[0].indexOf(disciplina_y), 1);
+                acc[1] = acc[1].concat(disciplina_y);
+              }
+            }
           }
         })
         return acc            
