@@ -1,42 +1,31 @@
 <%- contentFor('body') %>
 <h1 class="text-center title-1"> Cadastro de Disciplina </h1>
 <form action="/disciplina" method="post" class="webform-client-form webform-client-form-48">
-    <p style="text-align:left !important;">nome:</p>
-    <input class="form-control" type="text" name="nome" />
-    <p style="text-align:left !important;">codigo:</p>
-    <input class="form-control" type="text" name="codigo" />
-    <p style="text-align:left !important;">Horários:</p>
+  <p style="text-align:left !important;">nome:</p>
+  <input class="form-control" type="text" name="nome" />
+  <p style="text-align:left !important;">codigo:</p>
+  <input class="form-control" type="text" name="codigo" />
+  <p style="text-align:left !important;">Horários:</p>
 
-    <div class="row">
-    	<div class="form-group col">
-          <select class="selectpicker form-control" name="diaDaSemana_1" title="escolha um dia ">
-            <option value="Segunda">Segunda</option>
-            <option value="Terça">Terça</option>
-            <option value="Quarta">Quarta</option>
-            <option value="Quinta">Quinta</option>
-            <option value="Sexta">Sexta</option>
-            <option value="Sabado">Sabado</option>
-          </select>
-        </div>
-    	<div class="form-group col">
-        <select class="selectpicker form-control" name="horario_1" title="escolha um horário">
-          <option value="07:30">07:30</option>
-          <option value="08:20">08:20</option>
-          <option value="09:10">09:10</option>
-          <option value="10:10">10:10</option>
-          <option value="11:00">11:00</option>
-          <option value="13:30">13:30</option>
-          <option value="14:20">14:20</option>
-          <option value="15:10">15:10</option>
-          <option value="16:20">16:20</option>
-          <option value="17:10">17:10</option>
-          <option value="18:30">18:30</option>
-          <option value="19:20">19:20</option>
-          <option value="20:20">20:20</option>
-          <option value="21:10">21:10</option>
+  <div class="row">
+    <div class="form-group col">
+        <select class="selectpicker form-control" name="diaDaSemana_1" title="escolha um dia ">
+          <option value="Segunda">Segunda</option>
+          <option value="Terça">Terça</option>
+          <option value="Quarta">Quarta</option>
+          <option value="Quinta">Quinta</option>
+          <option value="Sexta">Sexta</option>
         </select>
       </div>
+    <div class="form-group col">
+      <select class="selectpicker form-control" name="horario_1" title="escolha um horário">
+        <option value="18:30">18:30</option>
+        <option value="19:20">19:20</option>
+        <option value="20:20">20:20</option>
+        <option value="21:10">21:10</option>
+      </select>
     </div>
+  </div>
 	<div class="row">
     <div class="form-group col">
       <select class="selectpicker form-control" name="diaDaSemana_2" title="escolha um dia ">
@@ -45,21 +34,10 @@
         <option value="Quarta">Quarta</option>
         <option value="Quinta">Quinta</option>
         <option value="Sexta">Sexta</option>
-        <option value="Sabado">Sabado</option>
       </select>
     </div>
     <div class="form-group col">
       <select class="selectpicker form-control" name="horario_2" title="escolha um horário">
-        <option value="07:30">07:30</option>
-        <option value="08:20">08:20</option>
-        <option value="09:10">09:10</option>
-        <option value="10:10">10:10</option>
-        <option value="11:00">11:00</option>
-        <option value="13:30">13:30</option>
-        <option value="14:20">14:20</option>
-        <option value="15:10">15:10</option>
-        <option value="16:20">16:20</option>
-        <option value="17:10">17:10</option>
         <option value="18:30">18:30</option>
         <option value="19:20">19:20</option>
         <option value="20:20">20:20</option>
@@ -68,64 +46,42 @@
     </div>
   </div> 
   <div class="row">
-      <div class="form-group col">
-        <select class="selectpicker form-control" name="diaDaSemana_3" title="escolha um dia ">
-          <option value="Segunda">Segunda</option>
-          <option value="Terça">Terça</option>
-          <option value="Quarta">Quarta</option>
-          <option value="Quinta">Quinta</option>
-          <option value="Sexta">Sexta</option>
-          <option value="Sabado">Sabado</option>
-        </select>
-      </div>
-      <div class="form-group col">
-        <select class="selectpicker form-control" name="horario_3" title="escolha um horário">
-          <option value="07:30">07:30</option>
-          <option value="08:20">08:20</option>
-          <option value="09:10">09:10</option>
-          <option value="10:10">10:10</option>
-          <option value="11:00">11:00</option>
-          <option value="13:30">13:30</option>
-          <option value="14:20">14:20</option>
-          <option value="15:10">15:10</option>
-          <option value="16:20">16:20</option>
-          <option value="17:10">17:10</option>
-          <option value="18:30">18:30</option>
-          <option value="19:20">19:20</option>
-          <option value="20:20">20:20</option>
-          <option value="21:10">21:10</option>
-        </select>
-      </div>
+    <div class="form-group col">
+      <select class="selectpicker form-control" name="diaDaSemana_3" title="escolha um dia ">
+        <option value="Segunda">Segunda</option>
+        <option value="Terça">Terça</option>
+        <option value="Quarta">Quarta</option>
+        <option value="Quinta">Quinta</option>
+        <option value="Sexta">Sexta</option>
+      </select>
+    </div>
+    <div class="form-group col">
+      <select class="selectpicker form-control" name="horario_3" title="escolha um horário">
+        <option value="18:30">18:30</option>
+        <option value="19:20">19:20</option>
+        <option value="20:20">20:20</option>
+        <option value="21:10">21:10</option>
+      </select>
+    </div>
   </div>
   <div class="row">
-      <div class="form-group col">
-        <select class="selectpicker form-control" name="diaDaSemana_4" title="escolha um dia ">
-          <option value="Segunda">Segunda</option>
-          <option value="Terça">Terça</option>
-          <option value="Quarta">Quarta</option>
-          <option value="Quinta">Quinta</option>
-          <option value="Sexta">Sexta</option>
-          <option value="Sabado">Sabado</option>
-        </select>
-      </div>
-      <div class="form-group col">
-        <select class="selectpicker form-control" name="horario_4" title="escolha um horário">
-          <option value="07:30">07:30</option>
-          <option value="08:20">08:20</option>
-          <option value="09:10">09:10</option>
-          <option value="10:10">10:10</option>
-          <option value="11:00">11:00</option>
-          <option value="13:30">13:30</option>
-          <option value="14:20">14:20</option>
-          <option value="15:10">15:10</option>
-          <option value="16:20">16:20</option>
-          <option value="17:10">17:10</option>
-          <option value="18:30">18:30</option>
-          <option value="19:20">19:20</option>
-          <option value="20:20">20:20</option>
-          <option value="21:10">21:10</option>
-        </select>
-      </div>
+    <div class="form-group col">
+      <select class="selectpicker form-control" name="diaDaSemana_4" title="escolha um dia ">
+        <option value="Segunda">Segunda</option>
+        <option value="Terça">Terça</option>
+        <option value="Quarta">Quarta</option>
+        <option value="Quinta">Quinta</option>
+        <option value="Sexta">Sexta</option>
+      </select>
+    </div>
+    <div class="form-group col">
+      <select class="selectpicker form-control" name="horario_4" title="escolha um horário">
+        <option value="18:30">18:30</option>
+        <option value="19:20">19:20</option>
+        <option value="20:20">20:20</option>
+        <option value="21:10">21:10</option>
+      </select>
+    </div>
   </div>
   <a  href="/disciplinas"><input type="button" class="btn btn-secondary" value="Voltar" ></input></a>
   <input type="submit" class="btn btn-primary" value="Salvar" />

@@ -23,40 +23,63 @@ exports.new = function (req, res) {
     disciplinasOk = disciplinas
   }).then(()=>{
     // Verifica conflitos
-    var separator = disciplinasOk.reduce((acc, disciplina_x) => {
+    var disciplinas_separadas = disciplinasOk.reduce((acc, disciplina_x) => {
       disciplinasOk.forEach((disciplina_y)=>{
         // se não for a mesma disciplina...
         if(disciplina_x.codigo !== disciplina_y.codigo){
           // verifica se não possuem horários em conflito
-          disciplina_x.horarios.forEach((horario, diaDaSemana)=>{
-            // se tem conflito...
-            if(disciplina_y.horarios.get(diaDaSemana) === horario){
-              //e se as disciplinas já não estão no array de conflito, adiciona elas ao array, e remove do array de disciplinas ok
-              if(!acc[1].includes(disciplina_x)){
-                acc[0].splice(acc[0].indexOf(disciplina_x), 1);
-                acc[1] = acc[1].concat(disciplina_x);
+          // salva os horários em um array de map para facilitar a verificação, no estilo:
+          //  [
+          //    Map(a -> 1)
+          //    Map(b -> 2)
+          //    Map(c -> 3)
+          //  ]
+          //  Para que as chaves (dias da semana) possam ser duplicadas no Map.
+          //  O map facilita a função de verificar conflitos
+          var horarios_x = disciplina_x.horarios;
+          var horarios_x_map = [];
+          if(horarios_x.get('dia_1') && horarios_x.get('hora_1')) horarios_x_map.concat(new Map([[horarios_x.get('dia_1'), horarios_x.get('hora_1')]]));
+          if(horarios_x.get('dia_2') && horarios_x.get('hora_2')) horarios_x_map.concat(new Map([[horarios_x.get('dia_2'), horarios_x.get('hora_2')]]));
+          if(horarios_x.get('dia_3') && horarios_x.get('hora_3')) horarios_x_map.concat(new Map([[horarios_x.get('dia_3'), horarios_x.get('hora_3')]]));
+          if(horarios_x.get('dia_4') && horarios_x.get('hora_4')) horarios_x_map.concat(new Map([[horarios_x.get('dia_4'), horarios_x.get('hora_4')]]));
+
+          var horarios_y = disciplina_y.horarios;
+          var horarios_y_map = [];
+          if(horarios_y.get('dia_1') && horarios_y.get('hora_1')) horarios_y_map.concat(new Map([[horarios_y.get('dia_1'), horarios_y.get('hora_1')]]));
+          if(horarios_y.get('dia_2') && horarios_y.get('hora_2')) horarios_y_map.concat(new Map([[horarios_y.get('dia_2'), horarios_y.get('hora_2')]]));
+          if(horarios_y.get('dia_3') && horarios_y.get('hora_3')) horarios_y_map.concat(new Map([[horarios_y.get('dia_3'), horarios_y.get('hora_3')]]));
+          if(horarios_y.get('dia_4') && horarios_y.get('hora_4')) horarios_y_map.concat(new Map([[horarios_y.get('dia_4'), horarios_y.get('hora_4')]]));
+
+          horarios_x_map.forEach( map_x => map_x.forEach((hora_x, dia_x) => {
+            horarios_y_map.forEach( map_y => {
+              // se possuem conflito e se as disciplinas já não estão no array de conflito, adiciona elas ao array, e remove do array de disciplinas ok
+              if(map_y.get(dia_x) === hora_x){
+                if(!acc[1].includes(disciplina_x)){
+                  acc[0].splice(acc[0].indexOf(disciplina_x), 1);
+                  acc[1] = acc[1].concat(disciplina_x);
+                }
+                if(!acc[1].includes(disciplina_y)){
+                  acc[0].splice(acc[0].indexOf(disciplina_y), 1);
+                  acc[1] = acc[1].concat(disciplina_y);
+                }
               }
-              if(!acc[1].includes(disciplina_y)){
-                acc[0].splice(acc[0].indexOf(disciplina_y), 1);
-                acc[1] = acc[1].concat(disciplina_y);
-              }
-            } 
-          })
+            })
+          }))
         }
       })
       return acc            
     }, [disciplinasOk, []])
 
     // separa os objectId das disciplinas para salvar no aluno
-    aluno.disciplinas_ok = separator[0].reduce((acc, x) => {return acc.concat(x._id)}, []);
-    aluno.disciplinas_conflito = separator[1].reduce((acc, x) => {return acc.concat(x._id)}, []);
-    aluno.save(function (err) {
+    aluno.disciplinas_ok = disciplinas_separadas[0].reduce((acc, x) => {return acc.concat(x._id)}, []);
+    aluno.disciplinas_conflito = disciplinas_separadas[1].reduce((acc, x) => {return acc.concat(x._id)}, []);
+    aluno.save(function (err, aluno) {
       if (err) {
         console.log("Error! " + err.message);
         return err;
       }else{
         console.log("Post saved");
-        res.redirect("alunos");
+        res.redirect(aluno._id);
       }
     });
   })
@@ -86,35 +109,56 @@ exports.update = function (req, res) {
       disciplinasOk = disciplinas
     }).then(()=>{
       // Verifica conflitos
-      var separator = disciplinasOk.reduce((acc, disciplina_x) => {
+      var disciplinas_separadas = disciplinasOk.reduce((acc, disciplina_x) => {
         disciplinasOk.forEach((disciplina_y)=>{
           // se não for a mesma disciplina...
           if(disciplina_x.codigo !== disciplina_y.codigo){
             // verifica se não possuem horários em conflito
-            var horarios_x = disciplina_x.horarios
-            var horarios_y = disciplina_y.horarios
-            if((horarios_x.get('dia_1') === horarios_y.get('dia_1') && horarios_x.get('hora_1') === horarios_y.get('hora_1')) || 
-               (horarios_x.get('dia_2') === horarios_y.get('dia_2') && horarios_x.get('hora_2') === horarios_y.get('hora_2')) || 
-               (horarios_x.get('dia_3') === horarios_y.get('dia_3') && horarios_x.get('hora_3') === horarios_y.get('hora_3')) || 
-               (horarios_x.get('dia_4') === horarios_y.get('dia_4') && horarios_x.get('hora_4') === horarios_y.get('hora_4')) ){
-              // se possuem conflito e se as disciplinas já não estão no array de conflito, adiciona elas ao array, e remove do array de disciplinas ok
-              if(!acc[1].includes(disciplina_x)){
-                acc[0].splice(acc[0].indexOf(disciplina_x), 1);
-                acc[1] = acc[1].concat(disciplina_x);
-              }
-              if(!acc[1].includes(disciplina_y)){
-                acc[0].splice(acc[0].indexOf(disciplina_y), 1);
-                acc[1] = acc[1].concat(disciplina_y);
-              }
-            }
+            // salva os horários em um array de map para facilitar a verificação, no estilo:
+            //  [
+            //    Map(a -> 1)
+            //    Map(b -> 2)
+            //    Map(c -> 3)
+            //  ]
+            //  Para que as chaves (dias da semana) possam ser duplicadas no Map.
+            //  O map facilita a função de verificar conflitos
+            var horarios_x = disciplina_x.horarios;
+            var horarios_x_map = [];
+            if(horarios_x.get('dia_1') && horarios_x.get('hora_1')) horarios_x_map.concat(new Map([[horarios_x.get('dia_1'), horarios_x.get('hora_1')]]));
+            if(horarios_x.get('dia_2') && horarios_x.get('hora_2')) horarios_x_map.concat(new Map([[horarios_x.get('dia_2'), horarios_x.get('hora_2')]]));
+            if(horarios_x.get('dia_3') && horarios_x.get('hora_3')) horarios_x_map.concat(new Map([[horarios_x.get('dia_3'), horarios_x.get('hora_3')]]));
+            if(horarios_x.get('dia_4') && horarios_x.get('hora_4')) horarios_x_map.concat(new Map([[horarios_x.get('dia_4'), horarios_x.get('hora_4')]]));
+
+            var horarios_y = disciplina_y.horarios;
+            var horarios_y_map = [];
+            if(horarios_y.get('dia_1') && horarios_y.get('hora_1')) horarios_y_map.concat(new Map([[horarios_y.get('dia_1'), horarios_y.get('hora_1')]]));
+            if(horarios_y.get('dia_2') && horarios_y.get('hora_2')) horarios_y_map.concat(new Map([[horarios_y.get('dia_2'), horarios_y.get('hora_2')]]));
+            if(horarios_y.get('dia_3') && horarios_y.get('hora_3')) horarios_y_map.concat(new Map([[horarios_y.get('dia_3'), horarios_y.get('hora_3')]]));
+            if(horarios_y.get('dia_4') && horarios_y.get('hora_4')) horarios_y_map.concat(new Map([[horarios_y.get('dia_4'), horarios_y.get('hora_4')]]));
+
+            horarios_x_map.forEach( map_x => map_x.forEach((hora_x, dia_x) => {
+              horarios_y_map.forEach( map_y => {
+                // se possuem conflito e se as disciplinas já não estão no array de conflito, adiciona elas ao array, e remove do array de disciplinas ok
+                if(map_y.get(dia_x) === hora_x){
+                  if(!acc[1].includes(disciplina_x)){
+                    acc[0].splice(acc[0].indexOf(disciplina_x), 1);
+                    acc[1] = acc[1].concat(disciplina_x);
+                  }
+                  if(!acc[1].includes(disciplina_y)){
+                    acc[0].splice(acc[0].indexOf(disciplina_y), 1);
+                    acc[1] = acc[1].concat(disciplina_y);
+                  }
+                }
+              })
+            }))
           }
         })
         return acc            
       }, [disciplinasOk, []])
 
       // separa os objectId das disciplinas para salvar no aluno
-      aluno.disciplinas_ok = separator[0].reduce((acc, x) => {return acc.concat(x._id)}, []);
-      aluno.disciplinas_conflito = separator[1].reduce((acc, x) => {return acc.concat(x._id)}, []);
+      aluno.disciplinas_ok = disciplinas_separadas[0].reduce((acc, x) => {return acc.concat(x._id)}, []);
+      aluno.disciplinas_conflito = disciplinas_separadas[1].reduce((acc, x) => {return acc.concat(x._id)}, []);
       aluno.save(function (err, aluno) {
         if (err) {
           console.log("Error! " + err.message);

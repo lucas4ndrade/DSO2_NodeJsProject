@@ -16,7 +16,27 @@
         <tr>
           <th scope="row"><%= disciplina.codigo %></th>
           <td><%= disciplina.nome %></td>
-          <td><%= disciplina.horarios %></td>
+          <td>
+            <div class="dropdown">
+              <button class="btn btn-secondary dropdown-toggle" type="button" id="horarios_<%disciplina._id%>" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Horários
+              </button>
+              <div class="dropdown-menu" style="text-align: center !important;" aria-labelledby="horarios_<%disciplina._id%>">
+                <% if(disciplina.horarios.get('dia_1') && disciplina.horarios.get('hora_1')){ %>
+                  <p><b><%= disciplina.horarios.get('dia_1') %>:</b> <%= disciplina.horarios.get('hora_1') %></p>
+                <% } %>
+                <% if(disciplina.horarios.get('dia_2') && disciplina.horarios.get('hora_2')){ %>
+                  <p><b><%= disciplina.horarios.get('dia_2') %>:</b> <%= disciplina.horarios.get('hora_2') %></p>
+                <% } %>
+                <% if(disciplina.horarios.get('dia_3') && disciplina.horarios.get('hora_3')){ %>
+                  <p><b><%= disciplina.horarios.get('dia_3') %>:</b> <%= disciplina.horarios.get('hora_3') %></p>
+                <% } %>
+                <% if(disciplina.horarios.get('dia_4') && disciplina.horarios.get('hora_4')){ %>
+                  <p><b><%= disciplina.horarios.get('dia_4') %>:</b> <%= disciplina.horarios.get('hora_4') %></p>
+                <% } %>
+              </div>
+            </div>
+          </td>
         </tr>
       <%})%>
     </tbody>
@@ -38,7 +58,27 @@
         <tr>
           <th scope="row"><%= disciplina.codigo %></th>
           <td><%= disciplina.nome %></td>
-          <td><%= disciplina.horarios %></td>
+          <td>
+            <div class="dropdown">
+              <button class="btn btn-secondary dropdown-toggle" type="button" id="horarios_<%disciplina._id%>" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Horários
+              </button>
+              <div class="dropdown-menu" style="text-align: center !important;" aria-labelledby="horarios_<%disciplina._id%>">
+                <% if(disciplina.horarios.get('dia_1') && disciplina.horarios.get('hora_1')){ %>
+                  <p><b><%= disciplina.horarios.get('dia_1') %>:</b> <%= disciplina.horarios.get('hora_1') %></p>
+                <% } %>
+                <% if(disciplina.horarios.get('dia_2') && disciplina.horarios.get('hora_2')){ %>
+                  <p><b><%= disciplina.horarios.get('dia_2') %>:</b> <%= disciplina.horarios.get('hora_2') %></p>
+                <% } %>
+                <% if(disciplina.horarios.get('dia_3') && disciplina.horarios.get('hora_3')){ %>
+                  <p><b><%= disciplina.horarios.get('dia_3') %>:</b> <%= disciplina.horarios.get('hora_3') %></p>
+                <% } %>
+                <% if(disciplina.horarios.get('dia_4') && disciplina.horarios.get('hora_4')){ %>
+                  <p><b><%= disciplina.horarios.get('dia_4') %>:</b> <%= disciplina.horarios.get('hora_4') %></p>
+                <% } %>
+              </div>
+            </div>
+          </td>
         </tr>
       <%})%>
     </tbody>
