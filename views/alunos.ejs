@@ -1,9 +1,13 @@
 <%- contentFor('body') %>
 <h1 class="text-center title-1"> Lista de Alunos </h1>
-<ul>	
-	<% alunoslist.forEach(function(aluno){ %>
-    <li><a href="/aluno/<%= aluno._id %>"><%= aluno.nome %> (<%= aluno.matricula %>)</a></li> 
+<% if(alunoslist.length > 0) { %>
+  <ul class="list-group" style="margin-bottom:3%">	
+    <% alunoslist.forEach(function(aluno){ %>
+      <li class="list-group-item"><a href="/aluno/<%= aluno._id %>"><%= aluno.nome %> (<%= aluno.matricula %>)</a></li> 
     <%})%>
-</ul>
-<a href="/novoAluno">Novo Aluno</a>
-<a href="/">Voltar</a>
+  </ul>
+<%} else {%>
+  <p>Nenhum aluno cadastrado no sistema</p>
+<%} %>
+<a href="/novoAluno"><input type="button" class="btn btn-primary" value="Novo Aluno"></input></a>
+<a href="/"><input type="button" class="btn btn-secondary" value="Voltar"></input></a>

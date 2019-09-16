@@ -1,15 +1,15 @@
 <%- contentFor('body') %>
-<h1 class="text-center title-1"> Cadastro de Aluno </h1>
-<form action="/aluno" method="post"  class="webform-client-form webform-client-form-48">
+<h1 class="text-center title-1"> Editar de aluno </h1>
+<form action="/aluno/<%= aluno._id %>" method="post"  class="webform-client-form webform-client-form-48">
     <p style="text-align: left !important;">nome:</p>
-    <input type="text" name="nome" class="form-control" />
+    <input type="text" name="nome" class="form-control" value="<%= aluno.nome %>" />
 
     <p style="text-align: left !important;">Disciplinas:</p>
     <div class="row">
       <div class="form-group col">
         <select multiple="true" class="selectpicker form-control" data-live-search="true" name="disciplinas" data-width="100%" title="escolha uma ou mais disciplinas">
             <% disciplinas.forEach(function(disciplina){ %>
-              <option value="<%= disciplina._id %>"> <%= disciplina.nome %>(<%= disciplina.codigo %>)</option>
+              <option value="<%= disciplina._id %>" selected="<%= aluno.disciplinas_ok.includes(disciplina) || aluno.disciplinas_conflito.includes(disciplina)  %>"> <%= disciplina.nome %>(<%= disciplina.codigo %>)</option>
             <%})%>
         </select>
       </div>

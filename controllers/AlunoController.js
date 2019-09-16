@@ -1,106 +1,145 @@
+const mongoose = require('mongoose');
 Aluno = require('../models/AlunoSchema.js');
+AlunoModel = mongoose.model('alunocollection', Aluno, 'alunocollection');
 Disciplina = require("../models/DisciplinaSchema");
-const mongoose = require('mongoose')
+DisciplinaModel =  mongoose.model('disciplinacollection', Disciplina, 'disciplinacollection');
 
 // Index
 exports.index = function (req, res) {
-   var Alunos = mongoose.model('alunocollection', Aluno, 'alunocollection');
-   Alunos.find({}).lean().exec(
-    function (e, docs) {
-       res.render('alunos', { "alunoslist": docs });
-   });
+  AlunoModel.find({}).lean().exec(function (e, docs) {
+      res.render('alunos', { "alunoslist": docs });
+  });
 };
 
 // Create
 exports.new = function (req, res) {
-
-  var AlunoModel = mongoose.model('alunocollection', Aluno, 'alunocollection');
   var aluno = new AlunoModel();
 
   aluno.nome = req.body.nome;
   aluno.matricula = "2019" + Math.floor((Math.random() * 100) + 1) + Math.floor((Math.random() * 100) + 1) + Math.floor((Math.random() * 10) + 1);
-  if(req.body.disciplinas)[aluno.disciplinas_ok, aluno.disciplinas_conflito] = verifyDisciplinas(req.body.disciplinas);
+  
+  var disciplinasOk = [];
+  DisciplinaModel.find({'_id': {$in: req.body.disciplinas}}, function(err, disciplinas){
+    disciplinasOk = disciplinas
+  }).then(()=>{
+    // Verifica conflitos
+    var separator = disciplinasOk.reduce((acc, disciplina_x) => {
+      disciplinasOk.forEach((disciplina_y)=>{
+        // se não for a mesma disciplina...
+        if(disciplina_x.codigo !== disciplina_y.codigo){
+          // verifica se não possuem horários em conflito
+          disciplina_x.horarios.forEach((horario, diaDaSemana)=>{
+            // se tem conflito...
+            if(disciplina_y.horarios.get(diaDaSemana) === horario){
+              //e se as disciplinas já não estão no array de conflito, adiciona elas ao array, e remove do array de disciplinas ok
+              if(!acc[1].includes(disciplina_x)){
+                acc[0].splice(acc[0].indexOf(disciplina_x), 1);
+                acc[1] = acc[1].concat(disciplina_x);
+              }
+              if(!acc[1].includes(disciplina_y)){
+                acc[0].splice(acc[0].indexOf(disciplina_y), 1);
+                acc[1] = acc[1].concat(disciplina_y);
+              }
+            } 
+          })
+        }
+      })
+      return acc            
+    }, [disciplinasOk, []])
 
-  aluno.save(function (err) {
-    if (err) {
-      console.log("Error! " + err.message);
-      return err;
-    }
-    else {
-      console.log("Post saved");
-      res.redirect("alunos");
-    }
-  });
+    // separa os objectId das disciplinas para salvar no aluno
+    aluno.disciplinas_ok = separator[0].reduce((acc, x) => {return acc.concat(x._id)}, []);
+    aluno.disciplinas_conflito = separator[1].reduce((acc, x) => {return acc.concat(x._id)}, []);
+    aluno.save(function (err) {
+      if (err) {
+        console.log("Error! " + err.message);
+        return err;
+      }else{
+        console.log("Post saved");
+        res.redirect("alunos");
+      }
+    });
+  })
+  
 };
+
+
+exports.newPage = function(req, res){
+  DisciplinaModel.find({}).lean().exec((e, disciplinas) => {
+    res.render("novoAluno", {"disciplinas": disciplinas});
+  });
+}
 
 // View
 exports.view = function (req, res) {
-  Aluno.findById(req.params.aluno_id, function (err, aluno) {
-    if (err){
-      res.status(404).send(err);
-    }
-    res.status(200).json(aluno);
+  AlunoModel.findById(req.params.aluno_id).populate('disciplinas_ok').populate('disciplinas_conflito').exec((e, aluno)=>{
+    res.render('aluno', {'aluno': aluno});
   });
 };
 
 // Update
 exports.update = function (req, res) {
-  Aluno.findById(req.params.aluno_id, function (err, aluno) {
-    if (err){
-      res.status(404).send(err);
-    }
+  AlunoModel.findById(req.params.aluno_id, function (err, aluno) {
     if (req.body.nome) aluno.nome = req.body.nome
-    if (req.body.disciplinas) [aluno.disciplinas_ok, aluno.disciplinas_conflito] = verifyDisciplinas(req.body.disciplinas)
-    
-    aluno.save(function (err) {
-      if (err){
-        res.json(err);
-      }
+    var disciplinasOk = [];
+    DisciplinaModel.find({'_id': {$in: req.body.disciplinas}}, function(err, disciplinas){
+      disciplinasOk = disciplinas
+    }).then(()=>{
+      // Verifica conflitos
+      var separator = disciplinasOk.reduce((acc, disciplina_x) => {
+        disciplinasOk.forEach((disciplina_y)=>{
+          // se não for a mesma disciplina...
+          if(disciplina_x.codigo !== disciplina_y.codigo){
+            // verifica se não possuem horários em conflito
+            disciplina_x.horarios.forEach((horario, diaDaSemana)=>{
+              // se tem conflito...
+              if(disciplina_y.horarios.get(diaDaSemana) === horario){
+                //e se as disciplinas já não estão no array de conflito, adiciona elas ao array, e remove do array de disciplinas ok
+                if(!acc[1].includes(disciplina_x)){
+                  acc[0].splice(acc[0].indexOf(disciplina_x), 1);
+                  acc[1] = acc[1].concat(disciplina_x);
+                }
+                if(!acc[1].includes(disciplina_y)){
+                  acc[0].splice(acc[0].indexOf(disciplina_y), 1);
+                  acc[1] = acc[1].concat(disciplina_y);
+                }
+              } 
+            })
+          }
+        })
+        return acc            
+      }, [disciplinasOk, []])
 
-      res.status(200).json(aluno);
-    });
+      // separa os objectId das disciplinas para salvar no aluno
+      aluno.disciplinas_ok = separator[0].reduce((acc, x) => {return acc.concat(x._id)}, []);
+      aluno.disciplinas_conflito = separator[1].reduce((acc, x) => {return acc.concat(x._id)}, []);
+      aluno.save(function (err, aluno) {
+        if (err) {
+          console.log("Error! " + err.message);
+          return err;
+        }else{
+          console.log("Post saved");
+          res.redirect(aluno._id);
+        }
+      });
+    })
+    
   });
 };
+
+exports.editPage = function(req, res){
+  AlunoModel.findById(req.params.aluno_id).populate('disciplinas_ok').populate('disciplinas_conflito').exec((e, aluno)=>{
+    DisciplinaModel.find({}).lean().exec((e, disciplinas) => {
+      res.render("editarAluno", {"aluno": aluno, "disciplinas": disciplinas});
+    });
+  })
+}
 
 // Delete
 exports.delete = function (req, res) {
-  Aluno.remove({_id: req.params.aluno_id}, function (err, aluno) {
-    if (err){
-      res.status(404).send(err);
-    }
-    res.status(200);
+  AlunoModel.remove({_id: req.params.aluno_id}, function (err, aluno) {
+    AlunoModel.find({}).lean().exec(function (e, docs) {
+      res.render('alunos', { "alunoslist": docs });
+    });
   });
 };
-
-function verifyDisciplinas(disciplinas) {
-  var disciplinasOk = []
-  // Get nas disciplinas do aluno, recebendo os objetos
-  disciplinas.forEach((disciplina_id)=>{
-    Disciplina.findById(disciplina_id, function(err, disciplina){
-        disciplinasOk.concat(disciplina)
-    })
-  })
-  // Verifica conflitos
-  disciplinasOk.reduce((acc, disciplina_x) => {
-    disciplinasOk.forEach((disciplina_y)=>{
-      // se não for a mesma disciplina...
-      if(disciplina_x.codigo !== disciplina_y.codigo){
-        // verifica se não possuem horários em conflito
-        disciplina_x.horarios.forEach((horario)=>{
-          if(disciplina_y.horarios.includes(horario)){
-            // se achar conflito, adiciona as duas disciplinas ao array de disciplinas com conflito (se já não estiverem) e remove das disciplinas ok
-            if(!acc[1].includes(disciplina_x)) {
-              acc[1] = acc[1].concat(disciplina_x) 
-              acc[0].splice(acc[0].indexOf(disciplina_x), 1)
-            }
-            if(!acc[1].includes(disciplina_y)){
-              acc[1] = acc[1].concat(disciplina_y) 
-              acc[0].splice(acc[0].indexOf(disciplina_y), 1)
-            }
-          }
-        })
-      }
-    })
-    return acc            // separa apenas os ObjectID
-  }, [disciplinasOk, []]).reduce((acc, x) => [acc[0].concat(x[0]._id), acc[1].concat(x[1]._id)], [[],[]])
-}

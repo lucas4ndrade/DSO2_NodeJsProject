@@ -1,9 +1,13 @@
 <%- contentFor('body') %>
 <h1 class="text-center title-1"> Lista de Disciplinas </h1>
-<ul>
-	<% disciplinaslist.forEach(function(disciplina){ %>
-	<li><a href="/disciplina/<%= disciplina._id %>"><%= disciplina.nome %> (<%= disciplina.codigo %>)</a></li> 
-	<%})%>
-</ul>
-<a href="/novaDisciplina">Nova Disciplina</a>
-<a href="/">Voltar</a>
+<% if(disciplinaslist.length > 0){%>
+  <ul class="list-group" style="margin-bottom:3%">
+    <% disciplinaslist.forEach(function(disciplina){ %>
+      <li class="list-group-item"><a href="/disciplina/<%= disciplina._id %>"><%= disciplina.nome %> (<%= disciplina.codigo %>)</a></li> 
+    <%})%>
+  </ul>
+<%} else {%>
+  <p>Nenhuma disciplina registrada no sistema</p>
+<% } %>
+<a href="/novaDisciplina"><input type="button" class="btn btn-primary" value="Nova Disciplina"></input></a>
+<a href="/"><input type="button" class="btn btn-secondary" value="Voltar"></input></a>

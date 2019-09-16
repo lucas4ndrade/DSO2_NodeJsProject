@@ -11,11 +11,11 @@ const alunoSchema = new mongoose.Schema({
   },
   disciplinas_ok: [{
     type: mongoose.Schema.ObjectId,
-    ref: 'disciplina'
+    ref: 'disciplinacollection'
   }],
   disciplinas_conflito: [{
     type: mongoose.Schema.ObjectId,
-    ref: 'disciplina'
+    ref: 'disciplinacollection'
   }],
 }, { collection: 'alunocollection' })
 

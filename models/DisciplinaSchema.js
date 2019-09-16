@@ -9,11 +9,11 @@ const disciplinaSchema = new mongoose.Schema({
     type: String,
     required: [true, 'o atributo codigo é obrigatório']
   },
-  horarios: [{
-    type: String,
-    ref: 'disciplina',
+  horarios: {
+    type: Map,
+    of: String,
     required: [true, 'o atributo horário é obrigatório']
-  }]
+  }
 }, { collection: 'disciplinacollection' })
 
 module.exports = disciplinaSchema

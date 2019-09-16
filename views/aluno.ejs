@@ -1,0 +1,54 @@
+<%- contentFor('body') %>
+<h3 class="text-center title-1"> <%- aluno.nome%> (<%- aluno.matricula%>) </h3>
+
+<% if(aluno.disciplinas_ok.length > 0) { %>
+  <p>Disciplinas:</p>
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Código</th>
+        <th scope="col">Disciplina</th>
+        <th scope="col">Horários</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% aluno.disciplinas_ok.forEach(function(disciplina){ %>
+        <tr>
+          <th scope="row"><%= disciplina.codigo %></th>
+          <td><%= disciplina.nome %></td>
+          <td><%= disciplina.horarios %></td>
+        </tr>
+      <%})%>
+    </tbody>
+  </table>
+<%}%>
+
+<% if(aluno.disciplinas_conflito.length > 0) { %>
+  <p>Disciplinas Conflituosas:</p>
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Código</th>
+        <th scope="col">Disciplina</th>
+        <th scope="col">Horários</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% aluno.disciplinas_conflito.forEach(function(disciplina){ %>
+        <tr>
+          <th scope="row"><%= disciplina.codigo %></th>
+          <td><%= disciplina.nome %></td>
+          <td><%= disciplina.horarios %></td>
+        </tr>
+      <%})%>
+    </tbody>
+  </table>
+<%}%>
+
+<% if(aluno.disciplinas_conflito.length == 0 && aluno.disciplinas_ok.length == 0 ) { %>
+  <p>Nenhuma disciplina relacionada com o aluno</p>
+<%}%>
+
+<a href="/alunos"><input type="button" class="btn btn-secondary" value="Voltar" ></input></a>
+<a href="/editarAluno/<%= aluno._id %>"><input type="button" class="btn btn-primary" value="Editar informações" /></a>
+<a href="/apagarAluno/<%= aluno._id %>"><input type="button" class="btn btn-danger" value="Apagar aluno" /></a>

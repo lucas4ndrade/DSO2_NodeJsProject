@@ -1,0 +1,17 @@
+<%- contentFor('body') %>
+<h3 class="text-center title-1"> <%- disciplina.nome%> (<%- disciplina.codigo%>) </h3>
+
+<% if(disciplina.horarios){%>
+  <p>Horários:</p>
+  <ul class="list-group" style="margin-bottom:3%">
+    <% disciplina.horarios.forEach(function(horario, data){ %>
+      <li class="list-group-item"><b><%= data %>: </b><%= horario %></li> 
+    <%})%>
+  </ul>
+<%} else {%>
+  <p>Esta disciplina não possui horários</p>
+<% }%>
+
+<a href="/disciplinas"><input type="button" class="btn btn-secondary" value="Voltar" ></input></a>
+<a href="/editarDisciplina/<%= disciplina._id %>"><input type="button" class="btn btn-primary" value="Editar informações" /></a>
+<a href="/apagarDisciplina/<%= disciplina._id %>"><input type="button" class="btn btn-danger" value="Apagar disciplina" /></a>

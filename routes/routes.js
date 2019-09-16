@@ -9,20 +9,26 @@ router.get('/', function(req, res, next) {
 
 // aluno
 var alunoController = require('../controllers/AlunoController');
-router.get('/alunos', alunoController.index)
-router.get('/novoAluno', function(req, res) {
-  res.render('novoAluno');
-});
-router.post('/aluno', alunoController.new)
+router.get('/alunos', alunoController.index);
+router.get('/novoAluno', alunoController.newPage);
+router.get('/editarAluno/:aluno_id', alunoController.editPage);
+router.post('/aluno/:aluno_id', alunoController.update);
+router.get('/aluno/:aluno_id', alunoController.view);
+router.post('/aluno', alunoController.new);
+router.get('/apagarAluno/:aluno_id', alunoController.delete);
 
 
 // disciplina
 var disciplinaController = require('../controllers/DisciplinaController');
-router.get('/disciplinas', disciplinaController.index)
+router.get('/disciplinas', disciplinaController.index);
 router.get('/novaDisciplina', function(req, res) {
   res.render('novaDisciplina');
 });
-router.post('/disciplina', disciplinaController.new)
+router.get('/editarDisciplina/:disciplina_id', disciplinaController.editPage);
+router.post('/disciplina/:disciplina_id', disciplinaController.update);
+router.get('/disciplina/:disciplina_id', disciplinaController.view);
+router.post('/disciplina', disciplinaController.new);
+router.get('/apagarDisciplina/:disciplina_id', disciplinaController.delete);
 
 
 module.exports = router;
